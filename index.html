@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Button Triggered AJAX</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <!-- Add data-search="subject name" to determine which button-->
+    <button data-search="John F. Kennedy">John F. Kennedy</button>
+    <button data-search="Funny Dogs">Funny Dogs</button>
+    
+    <!-- last div to access latest gif on top of list -->
+    <div id="GIFArea"></div>
+    <script type="text/javascript">
+        $('button').on('click', function () {
+            var x = $(this).data("search");
+
+            // Modify query URL to add data-search and top ten gifs
+            var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=dc6zaTOxFJmzC&limit=10";
+            console.log(queryURL);
+            // Make actual API call
+            $.ajax({
+                    url: queryURL,
+                    method: 'GET'
+                })
+                .done(function (response) {
+                    // add data and rating but changed back to response only
+                    console.log(response);
+                    for (var i = 0; i < response.data.length; i++) {
+                        // Post to screen
+                        $('#GIFArea').prepend("<p>Rating: " + response.data[i].rating + "</p>");
+                        $('#GIFArea').prepend("<img src='" + response.data[i].images.downsized.url + "'>");
+                    }
+                })
+
+        })
+    </script>
+
+</body>
+
+</html>
