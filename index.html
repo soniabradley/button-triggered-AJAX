@@ -15,7 +15,6 @@
     <!-- Add data-search="subject name" to determine which button-->
     <button data-search="John F. Kennedy">John F. Kennedy</button>
     <button data-search="Malcolm X">Malcolm X</button>
-    <button data-search="">Dalai Lama</button>
     
     <!-- last div to access latest gif on top of list -->
     <div id="GIFArea"></div>
@@ -24,7 +23,7 @@
             var x = $(this).data("search");
 
             // Modify query URL to add data-search and top ten gifs
-            var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=dc6zaTOxFJmzC&limit=10";
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=dc6zaTOxFJmzC&limit=10";
             console.log(queryURL);
             // Make actual API call
             $.ajax({
